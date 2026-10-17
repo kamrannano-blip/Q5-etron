@@ -1,0 +1,621 @@
+
+
+<!DOCTYPE html>
+
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="theme-color" content="#101827">
+
+<title>Audi Q5 e-tron | دستیار هوشمند</title>
+
+<style>
+
+:root {
+
+  --bg:#101827;
+
+  --panel:#1b2638;
+
+  --panel2:#243249;
+
+  --text:#f4f7fc;
+
+  --muted:#aab8cc;
+
+  --red:#e52b3c;
+
+  --green:#37d6a0;
+
+  --border:#35445b;
+
+}
+
+* { box-sizing:border-box; }
+
+body {
+
+  margin:0;
+
+  background:var(--bg);
+
+  color:var(--text);
+
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif;
+
+}
+
+header {
+
+  padding:27px 20px 22px;
+
+  background:linear-gradient(140deg,#29394f,#111827 75%);
+
+  border-bottom:1px solid var(--border);
+
+}
+
+.brand { color:#ff6674; font-size:12px; letter-spacing:3px; }
+
+h1 { font-size:25px; margin:9px 0; }
+
+header p { color:var(--muted); font-size:13px; margin:0; }
+
+main { max-width:700px; margin:auto; padding:15px; }
+
+.card {
+
+  background:var(--panel);
+
+  border:1px solid var(--border);
+
+  border-radius:17px;
+
+  padding:18px;
+
+  margin-bottom:15px;
+
+}
+
+h2 { font-size:17px; margin:0 0 16px; }
+
+label {
+
+  display:block;
+
+  color:var(--muted);
+
+  font-size:13px;
+
+  margin:12px 0 7px;
+
+}
+
+input {
+
+  width:100%;
+
+  padding:13px;
+
+  border-radius:10px;
+
+  border:1px solid var(--border);
+
+  background:#101827;
+
+  color:white;
+
+  font-size:16px;
+
+  outline:none;
+
+}
+
+input:focus { border-color:var(--red); }
+
+button {
+
+  border:0;
+
+  border-radius:10px;
+
+  padding:13px;
+
+  background:var(--red);
+
+  color:white;
+
+  font-size:14px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+}
+
+.primary { width:100%; margin-top:15px; }
+
+.result {
+
+  margin-top:15px;
+
+  padding:15px;
+
+  background:#101827;
+
+  border:1px solid var(--border);
+
+  border-radius:12px;
+
+  line-height:2;
+
+}
+
+.big { font-size:27px; font-weight:800; color:var(--green); }
+
+.muted { color:var(--muted); font-size:12px; }
+
+.grid {
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:10px;
+
+}
+
+.stat {
+
+  background:var(--panel2);
+
+  border-radius:12px;
+
+  padding:13px;
+
+}
+
+.stat strong { display:block; font-size:20px; margin-top:7px; }
+
+.stat span { color:var(--muted); font-size:12px; }
+
+.tabs {
+
+  display:flex;
+
+  gap:7px;
+
+  overflow-x:auto;
+
+  margin-bottom:15px;
+
+}
+
+.tabs button {
+
+  white-space:nowrap;
+
+  background:var(--panel2);
+
+  flex:1;
+
+}
+
+.tabs button.active { background:var(--red); }
+
+.page { display:none; }
+
+.page.active { display:block; }
+
+footer {
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:11px;
+
+  padding:15px 10px 30px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+  <div class="brand">AUDI • ELECTRIC MOBILITY</div>
+
+  <h1>دستیار هوشمند آئودی</h1>
+
+  <p>Q5 e-tron 2025 | محاسبات خودرو برقی</p>
+
+</header>
+
+<main>
+
+  <div class="grid" style="margin-bottom:15px">
+
+    <div class="stat">
+
+      <span>ظرفیت ناخالص مرجع</span>
+
+      <strong>83.4 kWh</strong>
+
+    </div>
+
+    <div class="stat">
+
+      <span>ظرفیت قابل استفاده مرجع</span>
+
+      <strong>77 kWh</strong>
+
+    </div>
+
+  </div>
+
+  <div class="tabs">
+
+    <button class="active" data-page="range">برد خودرو</button>
+
+    <button data-page="battery">باتری</button>
+
+    <button data-page="charge">شارژ</button>
+
+    <button data-page="cost">هزینه</button>
+
+  </div>
+
+  <section id="range" class="page active">
+
+    <div class="card">
+
+      <h2>محاسبهٔ برد رانندگی</h2>
+
+      <label for="soc">درصد فعلی باتری (%)</label>
+
+      <input id="soc" type="number" min="0" max="100" value="100">
+
+      <label for="consumption">مصرف برق (kWh/100 km)</label>
+
+      <input id="consumption" type="number" min="1" step="0.1" value="16">
+
+      <label for="usable">ظرفیت قابل استفادهٔ باتری (kWh)</label>
+
+      <input id="usable" type="number" min="1" step="0.1" value="77">
+
+      <label for="reserve">ذخیرهٔ باتری برای رسیدن (%)</label>
+
+      <input id="reserve" type="number" min="0" max="100" value="10">
+
+      <button class="primary" onclick="calcRange()">محاسبهٔ برد</button>
+
+      <div id="rangeResult" class="result">اطلاعات را وارد کن.</div>
+
+    </div>
+
+  </section>
+
+  <section id="battery" class="page">
+
+    <div class="card">
+
+      <h2>تخمین ظرفیت باتری از رانندگی واقعی</h2>
+
+      <label for="distance">مسافت پیموده‌شده (km)</label>
+
+      <input id="distance" type="number" min="0" step="0.1" value="100">
+
+      <label for="usedSoc">درصد باتری مصرف‌شده (%)</label>
+
+      <input id="usedSoc" type="number" min="0.1" max="100" step="0.1" value="20">
+
+      <label for="actualConsumption">مصرف نمایش‌داده‌شده (kWh/100 km)</label>
+
+      <input id="actualConsumption" type="number" min="0" step="0.1" value="16">
+
+      <button class="primary" onclick="calcBattery()">تخمین ظرفیت</button>
+
+      <div id="batteryResult" class="result">اطلاعات رانندگی را وارد کن.</div>
+
+      <p class="muted">این محاسبه تخمینی است؛ خطای نمایش درصد باتری، تغییر دما و تلفات می‌تواند نتیجه را تغییر دهد.</p>
+
+    </div>
+
+  </section>
+
+  <section id="charge" class="page">
+
+    <div class="card">
+
+      <h2>محاسبهٔ شارژ خودرو</h2>
+
+      <label for="startSoc">درصد شروع شارژ (%)</label>
+
+      <input id="startSoc" type="number" min="0" max="100" value="20">
+
+      <label for="endSoc">درصد پایان شارژ (%)</label>
+
+      <input id="endSoc" type="number" min="0" max="100" value="80">
+
+      <label for="chargeCapacity">ظرفیت قابل استفاده (kWh)</label>
+
+      <input id="chargeCapacity" type="number" min="1" value="77">
+
+      <label for="power">توان متوسط شارژ (kW)</label>
+
+      <input id="power" type="number" min="0.1" step="0.1" value="11">
+
+      <label for="efficiency">بازده شارژ (%)</label>
+
+      <input id="efficiency" type="number" min="1" max="100" value="90">
+
+      <button class="primary" onclick="calcCharge()">محاسبهٔ شارژ</button>
+
+      <div id="chargeResult" class="result">اطلاعات شارژ را وارد کن.</div>
+
+      <p class="muted">زمان واقعی با کاهش توان، دمای باتری و محدودیت شارژر تغییر می‌کند.</p>
+
+    </div>
+
+  </section>
+
+  <section id="cost" class="page">
+
+    <div class="card">
+
+      <h2>محاسبهٔ هزینهٔ برق</h2>
+
+      <label for="costDistance">مسافت سفر (km)</label>
+
+      <input id="costDistance" type="number" min="0" value="300">
+
+      <label for="costConsumption">مصرف خودرو (kWh/100 km)</label>
+
+      <input id="costConsumption" type="number" min="0" step="0.1" value="16">
+
+      <label for="price">قیمت هر kWh برق (تومان)</label>
+
+      <input id="price" type="number" min="0" value="2000">
+
+      <label for="costEfficiency">بازده برق ورودی به باتری (%)</label>
+
+      <input id="costEfficiency" type="number" min="1" max="100" value="90">
+
+      <button class="primary" onclick="calcCost()">محاسبهٔ هزینه</button>
+
+      <div id="costResult" class="result">اطلاعات را وارد کن.</div>
+
+    </div>
+
+  </section>
+
+  <div class="card">
+
+    <h2>یادداشت‌های خودرو</h2>
+
+    <label for="notes">یادداشت و اطلاعات تست‌های واقعی</label>
+
+    <textarea id="notes" rows="4" style="width:100%;padding:12px;border-radius:10px;background:#101827;color:white;border:1px solid var(--border);font:inherit" placeholder="مثلاً: شارژ از 28٪ تا 80٪، برق شارژر 37.21 kWh"></textarea>
+
+    <button class="primary" onclick="saveNotes()">ذخیره روی گوشی</button>
+
+    <div id="notesResult" class="muted" style="margin-top:10px"></div>
+
+  </div>
+
+  <footer>
+
+    نسخهٔ 1.0 • ابزار محاسباتی آفلاین • اعداد باتری قابل تنظیم هستند
+
+  </footer>
+
+</main>
+
+<script>
+
+const $ = id => document.getElementById(id);
+
+function num(id) {
+
+  return Number($(id).value);
+
+}
+
+function valid(ids) {
+
+  return ids.every(id => $(id).value.trim() !== "" &&
+
+    Number.isFinite(num(id)));
+
+}
+
+function fmt(value, digits=1) {
+
+  return value.toLocaleString("fa-IR", {
+
+    maximumFractionDigits:digits
+
+  });
+
+}
+
+function calcRange() {
+
+  const ids = ["soc","consumption","usable","reserve"];
+
+  if (!valid(ids)) return alert("همهٔ مقادیر را وارد کن.");
+
+  const soc=num("soc"), c=num("consumption"),
+
+        cap=num("usable"), r=num("reserve");
+
+  if(soc<0||soc>100||r<0||r>100||c<=0||cap<=0)
+
+    return alert("مقادیر واردشده معتبر نیستند.");
+
+  const available=Math.max(0,soc-r)/100*cap;
+
+  const km=available/c*100;
+
+  $("rangeResult").innerHTML =
+
+    `<div class="muted">برد تخمینی با ذخیرهٔ انتخابی</div>
+
+     <div class="big">${fmt(km,0)} کیلومتر</div>
+
+     انرژی قابل مصرف: ${fmt(available,2)} kWh
+
+     <br>برد تخمینی از 100٪ با همین مصرف:
+
+     ${fmt(cap/c*100,0)} کیلومتر`;
+
+}
+
+function calcBattery() {
+
+  const ids=["distance","usedSoc","actualConsumption"];
+
+  if(!valid(ids)) return alert("همهٔ مقادیر را وارد کن.");
+
+  const d=num("distance"), s=num("usedSoc"), c=num("actualConsumption");
+
+  if(d<=0||s<=0||s>100||c<=0)
+
+    return alert("مقادیر واردشده معتبر نیستند.");
+
+  const energy=d*c/100;
+
+  const capacity=energy/(s/100);
+
+  $("batteryResult").innerHTML =
+
+    `<div class="muted">ظرفیت تخمینی متناظر با داده‌ها</div>
+
+     <div class="big">${fmt(capacity,2)} kWh</div>
+
+     انرژی محاسباتی مصرف‌شده: ${fmt(energy,2)} kWh
+
+     <br>این عدد اندازه‌گیری مستقیم ظرفیت باتری نیست.`;
+
+}
+
+function calcCharge() {
+
+  const ids=["startSoc","endSoc","chargeCapacity","power","efficiency"];
+
+  if(!valid(ids)) return alert("همهٔ مقادیر را وارد کن.");
+
+  const a=num("startSoc"), b=num("endSoc"), cap=num("chargeCapacity"),
+
+        p=num("power"), e=num("efficiency");
+
+  if(a<0||b>100||b<a||cap<=0||p<=0||e<=0||e>100)
+
+    return alert("مقادیر شارژ معتبر نیستند.");
+
+  const battery=cap*(b-a)/100;
+
+  const input=battery/(e/100);
+
+  const hours=input/p;
+
+  $("chargeResult").innerHTML =
+
+    `<div class="muted">برق ذخیره‌شده در باتری</div>
+
+     <div class="big">${fmt(battery,2)} kWh</div>
+
+     انرژی تقریبی موردنیاز از شارژر: ${fmt(input,2)} kWh
+
+     <br>زمان نظری شارژ: ${fmt(hours,2)} ساعت
+
+     <br>حدود ${fmt(Math.floor(hours),0)} ساعت و
+
+     ${fmt(Math.round((hours%1)*60),0)} دقیقه`;
+
+}
+
+function calcCost() {
+
+  const ids=["costDistance","costConsumption","price","costEfficiency"];
+
+  if(!valid(ids)) return alert("همهٔ مقادیر را وارد کن.");
+
+  const d=num("costDistance"), c=num("costConsumption"),
+
+        p=num("price"), e=num("costEfficiency");
+
+  if(d<0||c<0||p<0||e<=0||e>100)
+
+    return alert("مقادیر هزینه معتبر نیستند.");
+
+  const battery=d*c/100;
+
+  const grid=battery/(e/100);
+
+  const cost=grid*p;
+
+  $("costResult").innerHTML =
+
+    `<div class="muted">هزینهٔ تخمینی برق سفر</div>
+
+     <div class="big">${fmt(cost,0)} تومان</div>
+
+     انرژی مصرفی خودرو: ${fmt(battery,2)} kWh
+
+     <br>برق تقریبی دریافتی از شبکه: ${fmt(grid,2)} kWh`;
+
+}
+
+function saveNotes() {
+
+  try {
+
+    localStorage.setItem("audiQ5Notes", $("notes").value);
+
+    $("notesResult").textContent="یادداشت روی همین مرورگر ذخیره شد.";
+
+  } catch(e) {
+
+    $("notesResult").textContent="ذخیره‌سازی در این محیط در دسترس نیست.";
+
+  }
+
+}
+
+try {
+
+  $("notes").value=localStorage.getItem("audiQ5Notes")||"";
+
+} catch(e) {}
+
+document.querySelectorAll(".tabs button").forEach(button=>{
+
+  button.addEventListener("click",()=>{
+
+    document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));
+
+    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+
+    button.classList.add("active");
+
+    $(button.dataset.page).classList.add("active");
+
+  });
+
+});
+
+</script>
+
+</body>
+
+</html>
