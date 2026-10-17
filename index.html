@@ -12,7 +12,9 @@
 
 <meta name="theme-color" content="#101827">
 
-<title>Audi Q5 e-tron | دستیار هوشمند</title>
+<meta name="author" content="KAMRAN-DAVIN">
+
+<title>Audi Q5 e-tron 2025 | KAMRAN-DAVIN</title>
 
 <style>
 
@@ -52,7 +54,7 @@ body {
 
 header {
 
-  padding:27px 20px 22px;
+  padding:28px 20px 24px;
 
   background:linear-gradient(140deg,#29394f,#111827 75%);
 
@@ -60,11 +62,19 @@ header {
 
 }
 
-.brand { color:#ff6674; font-size:12px; letter-spacing:3px; }
+.brand {
 
-h1 { font-size:25px; margin:9px 0; }
+  color:#ff6674;
 
-header p { color:var(--muted); font-size:13px; margin:0; }
+  font-size:12px;
+
+  letter-spacing:3px;
+
+}
+
+h1 { font-size:25px; margin:10px 0; }
+
+header p { color:var(--muted); font-size:13px; }
 
 main { max-width:700px; margin:auto; padding:15px; }
 
@@ -96,7 +106,7 @@ label {
 
 }
 
-input {
+input, textarea {
 
   width:100%;
 
@@ -114,9 +124,11 @@ input {
 
   outline:none;
 
+  font-family:inherit;
+
 }
 
-input:focus { border-color:var(--red); }
+input:focus, textarea:focus { border-color:var(--red); }
 
 button {
 
@@ -154,57 +166,25 @@ button {
 
   line-height:2;
 
+  overflow-wrap:anywhere;
+
 }
 
 .big { font-size:27px; font-weight:800; color:var(--green); }
 
-.muted { color:var(--muted); font-size:12px; }
+.muted { color:var(--muted); font-size:12px; line-height:1.9; }
 
-.grid {
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
 
-  display:grid;
-
-  grid-template-columns:1fr 1fr;
-
-  gap:10px;
-
-}
-
-.stat {
-
-  background:var(--panel2);
-
-  border-radius:12px;
-
-  padding:13px;
-
-}
+.stat { background:var(--panel2); border-radius:12px; padding:13px; }
 
 .stat strong { display:block; font-size:20px; margin-top:7px; }
 
 .stat span { color:var(--muted); font-size:12px; }
 
-.tabs {
+.tabs { display:flex; gap:7px; overflow-x:auto; margin-bottom:15px; }
 
-  display:flex;
-
-  gap:7px;
-
-  overflow-x:auto;
-
-  margin-bottom:15px;
-
-}
-
-.tabs button {
-
-  white-space:nowrap;
-
-  background:var(--panel2);
-
-  flex:1;
-
-}
+.tabs button { white-space:nowrap; background:var(--panel2); flex:1; }
 
 .tabs button.active { background:var(--red); }
 
@@ -218,11 +198,39 @@ footer {
 
   color:var(--muted);
 
-  font-size:11px;
+  font-size:12px;
 
-  padding:15px 10px 30px;
+  line-height:2;
+
+  padding:20px 12px 32px;
 
 }
+
+.credit {
+
+  margin-top:12px;
+
+  padding:15px;
+
+  border:1px solid #69404a;
+
+  border-radius:13px;
+
+  background:linear-gradient(135deg,#271d2a,#172235);
+
+}
+
+.credit strong {
+
+  color:#ff6878;
+
+  letter-spacing:1px;
+
+  font-size:16px;
+
+}
+
+.credit .date { color:white; font-weight:600; }
 
 </style>
 
@@ -236,7 +244,7 @@ footer {
 
   <h1>دستیار هوشمند آئودی</h1>
 
-  <p>Q5 e-tron 2025 | محاسبات خودرو برقی</p>
+  <p>Audi Q5 e-tron 2025 | ابزار محاسباتی خودرو برقی</p>
 
 </header>
 
@@ -326,7 +334,7 @@ footer {
 
       <div id="batteryResult" class="result">اطلاعات رانندگی را وارد کن.</div>
 
-      <p class="muted">این محاسبه تخمینی است؛ خطای نمایش درصد باتری، تغییر دما و تلفات می‌تواند نتیجه را تغییر دهد.</p>
+      <p class="muted">این نتیجه تخمینی است و ممکن است با ظرفیت واقعی باتری تفاوت داشته باشد.</p>
 
     </div>
 
@@ -362,7 +370,7 @@ footer {
 
       <div id="chargeResult" class="result">اطلاعات شارژ را وارد کن.</div>
 
-      <p class="muted">زمان واقعی با کاهش توان، دمای باتری و محدودیت شارژر تغییر می‌کند.</p>
+      <p class="muted">زمان واقعی شارژ به دمای باتری، توان شارژر و محدودیت‌های خودرو بستگی دارد.</p>
 
     </div>
 
@@ -398,23 +406,35 @@ footer {
 
   </section>
 
-  <div class="card">
+  <section class="card">
 
     <h2>یادداشت‌های خودرو</h2>
 
-    <label for="notes">یادداشت و اطلاعات تست‌های واقعی</label>
+    <label for="notes">اطلاعات تست‌ها و شارژها</label>
 
-    <textarea id="notes" rows="4" style="width:100%;padding:12px;border-radius:10px;background:#101827;color:white;border:1px solid var(--border);font:inherit" placeholder="مثلاً: شارژ از 28٪ تا 80٪، برق شارژر 37.21 kWh"></textarea>
+    <textarea id="notes" rows="4" placeholder="مثلاً: شارژ از 28٪ تا 80٪، برق شارژر 37.21 kWh"></textarea>
 
     <button class="primary" onclick="saveNotes()">ذخیره روی گوشی</button>
 
     <div id="notesResult" class="muted" style="margin-top:10px"></div>
 
-  </div>
+  </section>
 
   <footer>
 
-    نسخهٔ 1.0 • ابزار محاسباتی آفلاین • اعداد باتری قابل تنظیم هستند
+    <div>ابزار محاسباتی خودرو برقی • نسخهٔ 1.1</div>
+
+    <div class="credit">
+
+      <div class="muted">طراحی و توسعه توسط</div>
+
+      <strong>KAMRAN-DAVIN</strong>
+
+      <div class="date" style="margin-top:8px">تاریخ طراحی: ۱۴۰۵/۰۷/۲۶</div>
+
+    </div>
+
+    <div style="margin-top:12px">Audi Q5 e-tron 2025</div>
 
   </footer>
 
@@ -424,17 +444,17 @@ footer {
 
 const $ = id => document.getElementById(id);
 
-function num(id) {
-
-  return Number($(id).value);
-
-}
+const num = id => Number($(id).value);
 
 function valid(ids) {
 
-  return ids.every(id => $(id).value.trim() !== "" &&
+  return ids.every(id =>
 
-    Number.isFinite(num(id)));
+    $(id).value.trim() !== "" &&
+
+    Number.isFinite(num(id))
+
+  );
 
 }
 
@@ -450,9 +470,9 @@ function fmt(value, digits=1) {
 
 function calcRange() {
 
-  const ids = ["soc","consumption","usable","reserve"];
+  const ids=["soc","consumption","usable","reserve"];
 
-  if (!valid(ids)) return alert("همهٔ مقادیر را وارد کن.");
+  if(!valid(ids)) return alert("همهٔ مقادیر را وارد کن.");
 
   const soc=num("soc"), c=num("consumption"),
 
@@ -486,7 +506,9 @@ function calcBattery() {
 
   if(!valid(ids)) return alert("همهٔ مقادیر را وارد کن.");
 
-  const d=num("distance"), s=num("usedSoc"), c=num("actualConsumption");
+  const d=num("distance"), s=num("usedSoc"),
+
+        c=num("actualConsumption");
 
   if(d<=0||s<=0||s>100||c<=0)
 
@@ -514,11 +536,15 @@ function calcCharge() {
 
   if(!valid(ids)) return alert("همهٔ مقادیر را وارد کن.");
 
-  const a=num("startSoc"), b=num("endSoc"), cap=num("chargeCapacity"),
+  const a=num("startSoc"), b=num("endSoc"),
 
-        p=num("power"), e=num("efficiency");
+        cap=num("chargeCapacity"), p=num("power"),
 
-  if(a<0||b>100||b<a||cap<=0||p<=0||e<=0||e>100)
+        e=num("efficiency");
+
+  if(a<0||a>100||b<a||b>100||cap<=0||
+
+     p<=0||e<=0||e>100)
 
     return alert("مقادیر شارژ معتبر نیستند.");
 
@@ -528,6 +554,10 @@ function calcCharge() {
 
   const hours=input/p;
 
+  const minutes=Math.round((hours%1)*60);
+
+  const h=Math.floor(hours)+(minutes===60?1:0);
+
   $("chargeResult").innerHTML =
 
     `<div class="muted">برق ذخیره‌شده در باتری</div>
@@ -536,11 +566,9 @@ function calcCharge() {
 
      انرژی تقریبی موردنیاز از شارژر: ${fmt(input,2)} kWh
 
-     <br>زمان نظری شارژ: ${fmt(hours,2)} ساعت
+     <br>زمان نظری شارژ: ${fmt(h,0)} ساعت و
 
-     <br>حدود ${fmt(Math.floor(hours),0)} ساعت و
-
-     ${fmt(Math.round((hours%1)*60),0)} دقیقه`;
+     ${fmt(minutes===60?0:minutes,0)} دقیقه`;
 
 }
 
@@ -582,11 +610,15 @@ function saveNotes() {
 
     localStorage.setItem("audiQ5Notes", $("notes").value);
 
-    $("notesResult").textContent="یادداشت روی همین مرورگر ذخیره شد.";
+    $("notesResult").textContent =
+
+      "یادداشت روی همین مرورگر ذخیره شد.";
 
   } catch(e) {
 
-    $("notesResult").textContent="ذخیره‌سازی در این محیط در دسترس نیست.";
+    $("notesResult").textContent =
+
+      "ذخیره‌سازی در این محیط در دسترس نیست.";
 
   }
 
@@ -602,9 +634,13 @@ document.querySelectorAll(".tabs button").forEach(button=>{
 
   button.addEventListener("click",()=>{
 
-    document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));
+    document.querySelectorAll(".tabs button")
 
-    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+      .forEach(b=>b.classList.remove("active"));
+
+    document.querySelectorAll(".page")
+
+      .forEach(p=>p.classList.remove("active"));
 
     button.classList.add("active");
 
