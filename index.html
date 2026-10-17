@@ -210,7 +210,7 @@ footer {
 
   margin-top:12px;
 
-  padding:15px;
+  padding:17px;
 
   border:1px solid #69404a;
 
@@ -220,17 +220,59 @@ footer {
 
 }
 
-.credit strong {
+.credit .credit-label {
+
+  color:var(--muted);
+
+  font-size:12px;
+
+}
+
+.credit .creator {
+
+  display:block;
 
   color:#ff6878;
 
   letter-spacing:1px;
 
-  font-size:16px;
+  font-size:17px;
+
+  font-weight:800;
+
+  direction:ltr;
+
+  margin-top:5px;
 
 }
 
-.credit .date { color:white; font-weight:600; }
+.credit .phone {
+
+  display:block;
+
+  direction:ltr;
+
+  unicode-bidi:isolate;
+
+  color:white;
+
+  font-weight:600;
+
+  font-size:14px;
+
+  margin-top:9px;
+
+}
+
+.credit .date {
+
+  color:white;
+
+  font-weight:600;
+
+  margin-top:9px;
+
+}
 
 </style>
 
@@ -294,11 +336,11 @@ footer {
 
       <label for="consumption">مصرف برق (kWh/100 km)</label>
 
-      <input id="consumption" type="number" min="1" step="0.1" value="16">
+      <input id="consumption" type="number" min="0.1" step="0.1" value="16">
 
       <label for="usable">ظرفیت قابل استفادهٔ باتری (kWh)</label>
 
-      <input id="usable" type="number" min="1" step="0.1" value="77">
+      <input id="usable" type="number" min="0.1" step="0.1" value="77">
 
       <label for="reserve">ذخیرهٔ باتری برای رسیدن (%)</label>
 
@@ -320,7 +362,7 @@ footer {
 
       <label for="distance">مسافت پیموده‌شده (km)</label>
 
-      <input id="distance" type="number" min="0" step="0.1" value="100">
+      <input id="distance" type="number" min="0.1" step="0.1" value="100">
 
       <label for="usedSoc">درصد باتری مصرف‌شده (%)</label>
 
@@ -328,13 +370,13 @@ footer {
 
       <label for="actualConsumption">مصرف نمایش‌داده‌شده (kWh/100 km)</label>
 
-      <input id="actualConsumption" type="number" min="0" step="0.1" value="16">
+      <input id="actualConsumption" type="number" min="0.1" step="0.1" value="16">
 
       <button class="primary" onclick="calcBattery()">تخمین ظرفیت</button>
 
       <div id="batteryResult" class="result">اطلاعات رانندگی را وارد کن.</div>
 
-      <p class="muted">این نتیجه تخمینی است و ممکن است با ظرفیت واقعی باتری تفاوت داشته باشد.</p>
+      <p class="muted">نتیجه تخمینی است و ممکن است با ظرفیت واقعی باتری تفاوت داشته باشد.</p>
 
     </div>
 
@@ -356,7 +398,7 @@ footer {
 
       <label for="chargeCapacity">ظرفیت قابل استفاده (kWh)</label>
 
-      <input id="chargeCapacity" type="number" min="1" value="77">
+      <input id="chargeCapacity" type="number" min="0.1" step="0.1" value="77">
 
       <label for="power">توان متوسط شارژ (kW)</label>
 
@@ -422,15 +464,17 @@ footer {
 
   <footer>
 
-    <div>ابزار محاسباتی خودرو برقی • نسخهٔ 1.1</div>
+    <div>ابزار محاسباتی خودرو برقی • نسخهٔ 1.2</div>
 
     <div class="credit">
 
-      <div class="muted">طراحی و توسعه توسط</div>
+      <div class="credit-label">طراحی و توسعه توسط</div>
 
-      <strong>KAMRAN-DAVIN</strong>
+      <strong class="creator">KAMRAN-DAVIN</strong>
 
-      <div class="date" style="margin-top:8px">تاریخ طراحی: ۱۴۰۵/۰۷/۲۶</div>
+      <span class="phone">TEL : +989121759942</span>
+
+      <div class="date">تاریخ طراحی: ۱۴۰۵/۰۷/۲۶</div>
 
     </div>
 
@@ -554,9 +598,7 @@ function calcCharge() {
 
   const hours=input/p;
 
-  const minutes=Math.round((hours%1)*60);
-
-  const h=Math.floor(hours)+(minutes===60?1:0);
+  const totalMinutes=Math.round(hours*60);
 
   $("chargeResult").innerHTML =
 
@@ -566,9 +608,9 @@ function calcCharge() {
 
      انرژی تقریبی موردنیاز از شارژر: ${fmt(input,2)} kWh
 
-     <br>زمان نظری شارژ: ${fmt(h,0)} ساعت و
+     <br>زمان نظری شارژ: ${fmt(Math.floor(totalMinutes/60),0)} ساعت و
 
-     ${fmt(minutes===60?0:minutes,0)} دقیقه`;
+     ${fmt(totalMinutes%60,0)} دقیقه`;
 
 }
 
